@@ -12,7 +12,7 @@ body {
 .timer-container {
     text-align: center;
     padding: 2.5rem;
-    background-color: yellow;
+    background-color: white;
     border-radius: 16px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -44,25 +44,41 @@ button {
 }
 
 .start-button {
-    background-color: #007AFF;
+    background-color: #007AFF;  /* Primary blue */
 }
 
 .start-button:hover {
-    background-color: #0066d6;
+    background-color: #0066d6;  /* Darker blue */
 }
 
 .pause-button {
-    background-color: #FF9500;
+    background-color: rgba(0, 122, 255, 0.8);  /* Transparent primary blue */
 }
 
 .pause-button:hover {
-    background-color: #e68600;
+    background-color: #007AFF;  /* Primary blue */
+}
+
+#addFive {
+    background-color: #e5e5ea;  /* Light gray */
+    color: #1d1d1f;  /* Dark gray, almost black */
+}
+
+#addFive:hover {
+    background-color: #d1d1d6;  /* Slightly darker gray on hover */
 }
 
 #reset {
-    background-color: #6e6e73;
+    background-color: #6e6e73;  /* Primary gray */
 }
 
 #reset:hover {
-    background-color: #555558;
+    background-color: #555558;  /* Darker gray */
+}
+
+#focus-task {
+    font-size: 1.2rem;
+    color: #1d1d1f;
+    margin: 1rem 0;
+    font-weight: 500;
 } 

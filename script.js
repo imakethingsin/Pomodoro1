@@ -3,15 +3,19 @@ class PomodoroTimer {
         this.timeLeft = 25 * 60; // 25 minutes in seconds
         this.timerId = null;
         this.isRunning = false;
+        this.isNewSession = true;  // Add this flag
 
         // DOM elements
         this.timeDisplay = document.getElementById('time');
         this.startPauseButton = document.getElementById('startPause');
         this.resetButton = document.getElementById('reset');
+        this.addFiveButton = document.getElementById('addFive');
+        this.focusTaskDisplay = document.getElementById('focus-task');
 
         // Event listeners
-        this.startPauseButton.addEventListener('click', () => this.toggleStartPause());
+        this.startPauseButton.addEventListener('click', () => this.handleStart());
         this.resetButton.addEventListener('click', () => this.reset());
+        this.addFiveButton.addEventListener('click', () => this.addFiveMinutes());
 
         // Set initial button state
         this.updateButtonState();
@@ -76,8 +80,39 @@ class PomodoroTimer {
     reset() {
         this.pause();
         this.timeLeft = 25 * 60;
+        this.isNewSession = true;  // Set flag to true on reset
+        this.focusTaskDisplay.textContent = '';  // Clear the focus task
         this.updateDisplay();
         this.updateButtonState();
+    }
+
+    addFiveMinutes() {
+        this.timeLeft += 5 * 60;
+        this.updateDisplay();
+    }
+
+    async handleStart() {
+        if (!this.isRunning) {
+            if (this.isNewSession) {
+                const task = await this.askForTask();
+                if (task) {
+                    this.focusTaskDisplay.textContent = `Focus: ${task}`;
+                    this.isNewSession = false;
+                    this.toggleStartPause();
+                }
+            } else {
+                this.toggleStartPause();
+            }
+        } else {
+            this.toggleStartPause();
+        }
+    }
+
+    askForTask() {
+        return new Promise((resolve) => {
+            const task = prompt('What would you like to focus on?');
+            resolve(task);
+        });
     }
 }
 
